@@ -21,7 +21,7 @@ struct Surmagic: ParsableCommand {
                   """,
 
         // Commands can define a version for automatic '--version' support.
-        version: "1.3.0",
+        version: "1.4.0",
         
         // Subcommands
         subcommands: [`init`.self, xcf.self, env.self],

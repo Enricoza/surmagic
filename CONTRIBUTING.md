@@ -18,3 +18,24 @@ Thanks! :v:
 
 - [ ] Add surmagic/report.xml for -Xcode build archive- process
 - [ ] Add Github title image **👉Need Contribution here!** Not just an image actually an banner for the repository/tool.
+
+
+## How to build and test the binary locally
+
+- Open the `Package.swift` file
+- Archive the `surmagic` target for `Any Mac`
+- After it completes, right click on the new archive and `Show in Finder`
+- Right click on the archive and `Show Package Contents`
+- Navigate to `Products/usr/local/bin`
+- Copy the `surmagic` binary in that folder and paste it on the root of the project, under the `bin` folder
+- Navigate to a Demo project folder like `/Demo/project-demo/xcf`
+- Run the command `../../../bin/surmagic xcf --verbose` which uses the newly created binary
+
+## How to distribute the binary
+
+- Make sure you have updated the version in the `main.swift` file
+- Make sure to build the binary as expressed in the above process
+- Go to the `bin` folder and codesign the binary `codesign --timestamp -s XXXXXXX surmagic` 
+  - Make sure to replace XXXXXXX with your Apple Distribution certificate name 
+- Commit and push to master
+- Create a new release on github and upload the binary there

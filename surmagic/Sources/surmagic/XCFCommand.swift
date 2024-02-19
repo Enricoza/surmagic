@@ -213,7 +213,7 @@ public class XCFCommand {
 
             createFramework(with: surfile, verbose: verbose)
         } catch {
-            SurmagicHelper.shared.writeLine(SurmagicConstants().unexpectedError(#function),
+            SurmagicHelper.shared.writeLine(SurmagicConstants().unexpectedError(#function) + error.localizedDescription,
                                             inColor: .red, bold: false)
             
             exit(0)
@@ -275,10 +275,13 @@ public class XCFCommand {
         
         /// -framework
         for target in targets {
-            let archivePath = "./\(directory)/\(target.sdk)\(SurmagicConstants.archiveExtension)"
-            let path = archivePath + "/Products/Library/Frameworks/\(name).framework"
+            let archivePath = "/\(directory)/\(target.sdk)\(SurmagicConstants.archiveExtension)"
+            let path = "." + archivePath + "/Products/Library/Frameworks/\(name).framework"
             arguments.append("-framework")
             arguments.append(path)
+            arguments.append("-debug-symbols")
+            let symbolsPath = FileManager.default.currentDirectoryPath + archivePath + "/dSYMs/\(name).framework.dSYM"
+            arguments.append(symbolsPath)
         }
         
         // Output
