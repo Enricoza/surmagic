@@ -35,7 +35,11 @@ Thanks! :v:
 
 - Make sure you have updated the version in the `main.swift` file
 - Make sure to build the binary as expressed in the above process
-- Go to the `bin` folder and codesign the binary `codesign --timestamp -s XXXXXXX surmagic` 
-  - Make sure to replace XXXXXXX with your Apple Distribution certificate name 
+- Go to the `bin` folder and codesign the binary `codesign --timestamp -s XXXXXXX surmagic -o runtime` 
+  - Make sure to replace XXXXXXX with your Developer ID Application certificate name
+- Compress the binary and codesign the zip as well `codesign --timestamp -s XXXXXXX surmagic.zip -o runtime`
+- Notarize the file for distribution `xcrun notarytool submit surmagic.zip --keychain-profile "notarytool"`
+  - "notarytool" is the name you give to a custom keychain profile containing the [app specific password](https://support.apple.com/en-us/102654) that you created for this.
+  - More on Notarization [here](https://developer.apple.com/documentation/security/customizing-the-notarization-workflow#Upload-your-app-to-the-notarization-service)
 - Commit and push to master
-- Create a new release on github and upload the binary there
+- Create a new release on github and upload the zip there
